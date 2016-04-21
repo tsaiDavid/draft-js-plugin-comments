@@ -10,9 +10,9 @@ export default class StyleButton extends React.Component {
     }
 
     render() {
-        let className = 'TextEditor-styleButton';
+        let className = 'TextEditor-controls-button';
         if (this.props.active) {
-            className += ' TextEditor-activeButton';
+            className += ' TextEditor-controls-active';
         }
 
         return (
