@@ -1,0 +1,40 @@
+.TextEditor-root {
+    background: #fff;
+    border: 1px solid #ddd;
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+
+    .TextEditor-controls-bar {
+        background-color: #e6e6e6;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 4px;
+        padding-right: 4px;
+
+        .TextEditor-controls-button {
+            background-color: #999;
+            cursor: pointer;
+            margin-right: 10px;
+            padding: 2px 0;
+
+            .fa {
+                color: white;
+                min-width: 20px;
+                text-align: center;
+            }
+        }
+
+        .TextEditor-controls-active {
+            color: red;
+        }
+    }
+
+    .TextEditor-editor {
+        border-top: 1px solid #ccc;
+        cursor: text;
+        font-size: 16px;
+        padding: 10px;
+        min-height: 100px;
+    }
+
+}

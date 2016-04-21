@@ -1,9 +1,23 @@
 import React from 'react';
 import StyleButton from './StyleButton';
 
-const BOLD = <i className="fa fa-bold" aria-hidden="true"></i>;
-const ITALIC = <i className="fa fa-italic" aria-hidden="true"></i>;
-const UNDERLINE = <i className="fa fa-underline" aria-hidden="true"></i>;
+const BOLD = (
+    <span className="TextEditor-controls-button">
+        <i className="fa fa-bold" aria-hidden="true"></i>
+    </span>
+);
+
+const ITALIC = (
+    <span className="TextEditor-controls-button">
+        <i className="fa fa-italic" aria-hidden="true"></i>
+    </span>
+);
+
+const UNDERLINE = (
+    <span className="TextEditor-controls-button">
+        <i className="fa fa-underline" aria-hidden="true"></i>
+    </span>
+);
 
 const INLINE_STYLES = [
    { label: BOLD, style: 'BOLD' },
@@ -14,7 +28,7 @@ const INLINE_STYLES = [
 export const InlineStyleControls = (props) => {
     const currentStyle = props.editorState.getCurrentInlineStyle();
     return (
-        <div className="RichEditor-controls">
+        <div className="TextEditor-controls-bar">
             {INLINE_STYLES.map(type =>
                 <StyleButton
                     key={type.style}

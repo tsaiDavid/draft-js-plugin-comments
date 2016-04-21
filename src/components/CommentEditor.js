@@ -3,7 +3,6 @@ import { Editor, EditorState, RichUtils } from 'draft-js';
 import { BlockStyleControls } from './BlockStyleControls';
 import { InlineStyleControls } from './InlineStyleControls';
 import './textEditor.scss'
-// import '../styles/CommentEditor';
 
 export default class CommentEditor extends Component {
     constructor(props) {
@@ -49,18 +48,20 @@ export default class CommentEditor extends Component {
     render() {
         const { editorState } = this.state;
 
-// If the user changes block type before entering any text, we can
-// either style the placeholder or hide it. Let's just hide it now.
-        let className = 'RichEditor-editor';
+        /**
+         * If the user changes the block type before entering any text,
+         * we can either style the placeholder or hide it.
+         */
+        let className = 'TextEditor-editor';
         const contentState = editorState.getCurrentContent();
         if (!contentState.hasText()) {
             if (contentState.getBlockMap().first().getType() !== 'unstyled') {
-                className += ' RichEditor-hidePlaceholder';
+                className += ' TextEditor-hidePlaceholder';
             }
         }
 
         return (
-            <div className="RichEditor-root">
+            <div className="TextEditor-root">
                 <div className="TextEditor-controls-bar">
                     <InlineStyleControls
                         editorState={editorState}
