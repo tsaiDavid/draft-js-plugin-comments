@@ -28,7 +28,7 @@ const INLINE_STYLES = [
 export const InlineStyleControls = (props) => {
     const currentStyle = props.editorState.getCurrentInlineStyle();
     return (
-        <div className="TextEditor-controls-bar">
+        <div className="RichEditor-controls">
             {INLINE_STYLES.map(type =>
                 <StyleButton
                     key={type.style}

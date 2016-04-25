@@ -1,20 +1,30 @@
 import React, { Component } from 'react';
-import { Editor, EditorState, RichUtils } from 'draft-js';
-import { BlockStyleControls } from './BlockStyleControls';
+import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
+// import { BlockStyleControls } from './BlockStyleControls';
 import { InlineStyleControls } from './InlineStyleControls';
-import './textEditor.scss'
+import Toolbar from './Toolbar';
+import './textEditor.scss';
 
 export default class CommentEditor extends Component {
     constructor(props) {
         super(props);
-        this.state = { editorState: EditorState.createEmpty() };
+
+        this.state = {
+            editorState: EditorState.createEmpty()
+        };
 
         this.focus = () => this.refs.editor.focus();
         this.onChange = (editorState) => this.setState({ editorState });
 
+        this.getInnerContent = () => this._getInnerContent();
         this.handleKeyCommand = (command) => this._handleKeyCommand(command);
         this.toggleBlockType = (type) => this._toggleBlockType(type);
         this.toggleInlineStyle = (style) => this._toggleInlineStyle(style);
+    }
+
+    _getInnerContent() {
+        const content = this.state.editorState.getCurrentContent();
+        return convertToRaw(content);
     }
 
     _handleKeyCommand(command) {
@@ -29,20 +39,20 @@ export default class CommentEditor extends Component {
 
     _toggleBlockType(blockType) {
         this.onChange(
-              RichUtils.toggleBlockType(
+            RichUtils.toggleBlockType(
                 this.state.editorState,
                 blockType
-              )
-            );
+            )
+        );
     }
 
     _toggleInlineStyle(inlineStyle) {
         this.onChange(
-              RichUtils.toggleInlineStyle(
+            RichUtils.toggleInlineStyle(
                 this.state.editorState,
                 inlineStyle
-              )
-            );
+            )
+        );
     }
 
     render() {
@@ -62,13 +72,16 @@ export default class CommentEditor extends Component {
 
         return (
             <div className="TextEditor-root">
-                <div className="TextEditor-controls-bar">
+                <Toolbar>
                     <InlineStyleControls
                         editorState={editorState}
                         onToggle={this.toggleInlineStyle}
                     />
-                </div>
-                <div className={className} onClick={this.focus}>
+                </Toolbar>
+                <div
+                    className={className}
+                    onClick={this.focus}
+                >
                     <Editor
                         editorState={editorState}
                         handleKeyCommand={this.handleKeyCommand}

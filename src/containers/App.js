@@ -12,23 +12,30 @@ import CommentEditor from '../components/CommentEditor';
  * component to make the Redux store available to the rest of the app.
  */
 export default class App extends Component {
-  render() {
+    printData() {
+        console.log(this.refs.commentEditor.getInnerContent());
+    }
+
+
+    render() {
     // we can use ES6's object destructuring to effectively 'unpack' our props
-    const { counter, actions } = this.props;
-    return (
-      <div className="main-app-container">
-        <div className="main-app-nav">Draft JS Plugin: Comments</div>
-        {/* notice that we then pass those unpacked props into the Counter component */}
-        <CommentEditor />
-        <Footer />
-      </div>
-    );
-  }
+        // const { counter, actions } = this.props;
+        return (
+            <div className="main-app-container">
+                <div className="main-app-nav">Draft JS Plugin: Comments</div>
+                <CommentEditor ref="commentEditor"/>
+
+                <button onClick={() => {this.printData()}}>Click to Print Content to Console</button>
+
+                <Footer />
+            </div>
+        );
+    }
 }
 
 App.propTypes = {
-  counter: PropTypes.number.isRequired,
-  actions: PropTypes.object.isRequired
+    counter: PropTypes.number.isRequired,
+    actions: PropTypes.object.isRequired
 };
 
 /**
@@ -37,9 +44,9 @@ App.propTypes = {
  * object. By mapping it to props, we can pass it to the child component Counter.
  */
 function mapStateToProps(state) {
-  return {
-    counter: state.counter
-  };
+    return {
+        counter: state.counter
+    };
 }
 
 /**
@@ -51,9 +58,9 @@ function mapStateToProps(state) {
  * More info: http://redux.js.org/docs/api/bindActionCreators.html
  */
 function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(CounterActions, dispatch)
-  };
+    return {
+        actions: bindActionCreators(CounterActions, dispatch)
+    };
 }
 
 /**
